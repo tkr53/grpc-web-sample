@@ -1,0 +1,16 @@
+services:
+  go-server:
+    build:
+      context: ./server
+    container_name: go-server
+    ports:
+      - 8080:8080
+
+  envoy:
+    image: envoyproxy/envoy:v1.31.0
+    container_name: envoy
+    ports:
+      - 9000:9000
+      - 9901:9901
+    volumes:
+      - ./proxy/envoy.yaml:/etc/envoy/envoy.yaml
